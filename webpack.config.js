@@ -2,6 +2,7 @@ const path = require('path');
 
 const InertEntryPlugin = require('inert-entry-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const rollupCommonjsPlugin = require('rollup-plugin-commonjs');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -28,6 +29,7 @@ module.exports = {
 		}],
 	},
 	plugins: [
+		new ProgressBarPlugin(),
 		new InertEntryPlugin(),
 		(isProduction && new ZipPlugin({ filename: 'no-emoji.zip' })),
 	].filter(x => x),

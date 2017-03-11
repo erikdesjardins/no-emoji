@@ -28,6 +28,7 @@
     "firefox-extension-deploy": "1.1.0",
     "inert-entry-webpack-plugin": "2.0.0",
     "interpolate-loader": "1.0.0",
+    "progress-bar-webpack-plugin": "1.9.3",
     "prop-loader": "1.0.0",
     "rimraf": "2.6.1",
     "rollup-plugin-commonjs": "8.0.0",
