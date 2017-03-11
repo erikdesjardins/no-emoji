@@ -2,13 +2,14 @@ import { STORAGE_EXCLUDED_DOMAINS } from './util/constants';
 import { locationToRootDomain } from './util/location';
 import { get, set } from './util/storage';
 
-chrome.runtime.onMessage.addListener((enabling, { tab: { id: tabId } }) => {
-	// content script telling us that ran on this page
+chrome.runtime.onMessage.addListener((enabling, { tab: { id: tabId } }, sendResponse) => {
+	// content script telling us that it ran on this page
 	if (enabling) {
 		enablePageAction(tabId);
 	} else {
 		disablePageAction(tabId);
 	}
+	sendResponse();
 });
 
 chrome.pageAction.onClicked.addListener(async ({ id: tabId, url }) => {
