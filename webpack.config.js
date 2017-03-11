@@ -13,7 +13,6 @@ module.exports = {
 		path: path.join(__dirname, 'dist'),
 		filename: 'manifest.json',
 	},
-	devtool: 'source-map',
 	module: {
 		rules: [{
 			test: /\.entry\.js$/,
