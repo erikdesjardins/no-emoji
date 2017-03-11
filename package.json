@@ -25,6 +25,7 @@
     "cross-env": "3.2.3",
     "extricate-loader": "1.0.0",
     "file-loader": "0.10.1",
+    "firefox-extension-deploy": "1.1.0",
     "inert-entry-webpack-plugin": "2.0.0",
     "interpolate-loader": "1.0.0",
     "prop-loader": "1.0.0",
