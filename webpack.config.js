@@ -4,6 +4,7 @@ const InertEntryPlugin = require('inert-entry-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const rollupCommonjsPlugin = require('rollup-plugin-commonjs');
+const rollupReplacePlugin = require('rollup-plugin-re');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -19,7 +20,17 @@ module.exports = {
 			test: /\.entry\.js$/,
 			use: [
 				{ loader: 'file-loader', options: { name: '[name].js' } },
-				{ loader: 'webpack-rollup-loader', options: { plugins: [rollupCommonjsPlugin()] } },
+				{
+					loader: 'webpack-rollup-loader',
+					options: {
+						plugins: [
+							rollupCommonjsPlugin({ extensions: ['.js', '.png'] }),
+							rollupReplacePlugin({
+								patterns: [{ test: '__webpack_public_path__', replace: '""' }],
+							}),
+						],
+					},
+				},
 			],
 		}, {
 			test: /\.(png)$/,
