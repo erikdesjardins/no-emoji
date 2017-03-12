@@ -12,7 +12,7 @@ deployChrome({
 	clientId: process.env.CHROME_CLIENT_ID,
 	clientSecret: process.env.CHROME_CLIENT_SECRET,
 	refreshToken: process.env.CHROME_REFRESH_TOKEN,
-	id: 'INSERT_ID_HERE',
+	id: 'obbjmeopodlheliibjoabgbmchpecjaj',
 	zip: fs.createReadStream(path.join(__dirname, 'dist/no-emoji.zip'))
 }).then(function() {
 	console.log('Chrome deploy complete!');
