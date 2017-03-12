@@ -1,3 +1,7 @@
+import icon19 from '../images/icon19.png';
+import icon38 from '../images/icon38.png';
+import iconDisabled19 from '../images/icon19-disabled.png';
+import iconDisabled38 from '../images/icon38-disabled.png';
 import { STORAGE_EXCLUDED_DOMAINS } from './util/constants';
 import { locationToRootDomain } from './util/location';
 import { get, set } from './util/storage';
@@ -30,9 +34,11 @@ chrome.pageAction.onClicked.addListener(async ({ id: tabId, url }) => {
 function enablePageAction(tabId) {
 	chrome.pageAction.show(tabId);
 	chrome.pageAction.setTitle({ tabId, title: 'stop removing emoji on this domain' });
+	chrome.pageAction.setIcon({ tabId, path: { 19: icon19, 38: icon38 } });
 }
 
 function disablePageAction(tabId) {
-	chrome.pageAction.hide(tabId);
+	chrome.pageAction.show(tabId);
 	chrome.pageAction.setTitle({ tabId, title: 'start removing emoji on this domain' });
+	chrome.pageAction.setIcon({ tabId, path: { 19: iconDisabled19, 38: iconDisabled38 } });
 }
