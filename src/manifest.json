@@ -9,7 +9,7 @@
 	"applications": {
 		"gecko": {
 			"id": "no-emoji@erikdesjardins.io",
-			"strict_min_version": "53"
+			"strict_min_version": "53.0"
 		}
 	},
 	"permissions": [
