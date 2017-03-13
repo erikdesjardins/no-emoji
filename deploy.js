@@ -13,7 +13,7 @@ deployChrome({
 	clientSecret: process.env.CHROME_CLIENT_SECRET,
 	refreshToken: process.env.CHROME_REFRESH_TOKEN,
 	id: 'obbjmeopodlheliibjoabgbmchpecjaj',
-	zip: fs.createReadStream(path.join(__dirname, 'dist/no-emoji.zip'))
+	zip: fs.readFileSync(path.join(__dirname, 'dist/no-emoji.zip'))
 }).then(function() {
 	console.log('Chrome deploy complete!');
 }, function(err) {
