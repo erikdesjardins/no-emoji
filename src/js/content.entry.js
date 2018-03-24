@@ -22,8 +22,14 @@ import { get } from './util/storage';
 
 	// remove emoji
 	new MutationObserver(mutationRecords => {
+		const seenThisTick = new Set();
+
 		for (const record of mutationRecords) {
 			for (const node of record.addedNodes) {
+				// avoid running on trees where the parent was just walked (30% improvement)
+				seenThisTick.add(node);
+				if (seenThisTick.has(node.parentNode)) continue;
+
 				// avoid walking the tree (60% improvement)
 				if (!emoji.test(node.textContent)) continue;
 
