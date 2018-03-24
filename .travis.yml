@@ -21,15 +21,15 @@ env:
     # FIREFOX_SECRET
     - secure: KigZu/gYoV5ARd7LMX+inovHukq4DWS65hFLDOFYWiLZasJRdZFPbiw1Ogbafg0EdB7nMWT9YLlhZkarupHY/nabsecZ/QEE/Tf/8KkRnv/B8tKESiz1DQrBnfy/9Klvy8LY9Er+dEggRV1Q1DO878Gnr2Rh/kVaySPqdGuJGR0FefPggkCyp6vAuC1InVogq9Zx5YTv3erBlu2vgGS50qH9sQOy+K5BAsr4GfngF9RWO1VgIyCWAfFr5pIcLQTL/bult57j2Wgs5uq87oD4Aux1u68lPAXo+qWTXNhYN8R25O+ekAmZ1xvD+1Ub5bdJKbzTm8PuSrFUVjF/nKROKVhw0BAUolsL1+Q2JUNQhgiE5GQFawcJwnqsmvI65C1ldP3ksOTGFkzVLvxW8rBK0MizXDNzlifLG1OiRfu1mH3SUOxFf5ByRS78vTUOsl8SiV0NaPxfxJClb/3OhaevABgz4Ert9JqcofoCJtv+OcX7YlDg9d7YbYn0CKgHFGIrGZexk+gmqB4lYFDddLpusOV/HkdlW5kAXAK8E6bQkMzr2DmHQ0w67lSZCPUHN2TAhnbus8nv9A/gYH46UbSPGNwCGoZA/4bFbSC8ZqpcEk/wwdKmU6+HgPoNo7/MkIIDrwdQRl0PsQhiW58j7/YM/mjb8PbeKtwuUWA4ThDA5Ck=
 deploy:
-  - provider: script
-    script: node deploy.js
-    skip_cleanup: true
-    on:
-      tags: true
   - provider: releases
     api_key:
       secure: RhxtszNnAdmu90OEKhXe2cvd7k8CRoqy1/iarzHep4bFsVx87NvHMJFsEVLcunNpnPoqpjoQQfcpJIfOwDZFx3kuYgmAb2giW58Y/AMKsi+d9MsI8bZeaFGL1SVk3H0mInyS9+qhLKiG4sZSo1VL7kaiZt9/7oaY+x+GtytYYp87TianWHV8s1U8hIiaGYyesGDsGAq/K6fZVAtZ6riGB0cuomB0q+JagXfTlAMmHd1Q3PZwczerbjbUI6CxDY4VKG0jk52Sg3s90QlMrfyN4INAaYnrvRQQ13Wd8Wc16H80zYhaST/oF2uuTU2KjZ2+zTIaZQs16TQMdGsCndYMhKEmvQgHkfZgY1bGug3d3Io7fgwZ0PXAN0sEgA9A4jcSSxtFqnciPubCio3RmFZB2gYML1ZwewHnVwKkIUSKb8Qw7Lle/69zZ91mb1DZp3DyvEquZtHgcp3UBG561MCy4ntm04Unrn8GN0opsEaWKyHnCUfMUuex21mCOKd7+kA6QBqecv3L/STSkaBQcwrw3ahKI4bbjNiUvjuRCOZwG7uidLaj0gXHd8H3DlHo6ckkErUZ+8PtcT6tQ15Vojg9ztfOTKGvXgFmH1yPCAXWd1xfF3ByZvdEWBrj0vB0SPvZgQEuTuSC6J13m427BBURUkgEDII8ifIVJdgnb8Q5/QI=
     file: dist/no-emoji.zip
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: script
+    script: node deploy.js
     skip_cleanup: true
     on:
       tags: true
