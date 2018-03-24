@@ -18,25 +18,35 @@ import { get } from './util/storage';
 		send(true);
 	}
 
-	const emojiRegex = emojiRegexFactory();
+	const emoji = emojiRegexFactory();
 
 	// remove emoji
 	new MutationObserver(mutationRecords => {
+		const seenThisTick = new Set();
+
 		for (const record of mutationRecords) {
 			for (const node of record.addedNodes) {
+				// avoid running on trees where the parent was just walked (30% improvement)
+				seenThisTick.add(node);
+				if (seenThisTick.has(node.parentNode)) continue;
+
 				// avoid walking the tree (60% improvement)
-				if (!emojiRegex.test(node.textContent)) continue;
+				if (!emoji.test(node.textContent)) continue;
 
 				const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
 				while (walker.nextNode()) {
 					// avoid reads of .nodeValue (5% improvement)
 					const oldVal = walker.currentNode.nodeValue;
-					// (not using .test first to avoid running regex twice (10% improvement)
-					const newVal = oldVal.replace(emojiRegex, '');
+					// not using .test first to avoid running regex twice (10% improvement)
+					// note: in testing `re.test(text)` and `text.replace(re, '') === text`
+					//       have approximately the same performance for negative results,
+					//       which is all that matters, because for positive results
+					//       we always have to run the replace anyways.
+					const newVal = oldVal.replace(emoji, '');
 					// avoid writes of .nodeValue (5% improvement)
-					if (newVal !== oldVal) {
-						walker.currentNode.nodeValue = newVal;
-					}
+					if (newVal === oldVal) continue;
+
+					walker.currentNode.nodeValue = newVal;
 				}
 			}
 		}
