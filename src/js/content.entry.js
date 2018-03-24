@@ -37,7 +37,11 @@ import { get } from './util/storage';
 				while (walker.nextNode()) {
 					// avoid reads of .nodeValue (5% improvement)
 					const oldVal = walker.currentNode.nodeValue;
-					// (not using .test first to avoid running regex twice (10% improvement)
+					// not using .test first to avoid running regex twice (10% improvement)
+					// note: in testing `re.test(text)` and `text.replace(re, '') === text`
+					//       have approximately the same performance for negative results,
+					//       which is all that matters, because for positive results
+					//       we always have to run the replace anyways.
 					const newVal = oldVal.replace(emoji, '');
 					// avoid writes of .nodeValue (5% improvement)
 					if (newVal !== oldVal) {
