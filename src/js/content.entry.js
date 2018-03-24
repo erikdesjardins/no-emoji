@@ -44,9 +44,9 @@ import { get } from './util/storage';
 					//       we always have to run the replace anyways.
 					const newVal = oldVal.replace(emoji, '');
 					// avoid writes of .nodeValue (5% improvement)
-					if (newVal !== oldVal) {
-						walker.currentNode.nodeValue = newVal;
-					}
+					if (newVal === oldVal) continue;
+
+					walker.currentNode.nodeValue = newVal;
 				}
 			}
 		}
