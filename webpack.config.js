@@ -15,7 +15,7 @@ module.exports = {
 		rules: [{
 			test: /\.entry\.js$/,
 			use: [
-				{ loader: 'file-loader', options: { name: '[name].js' } },
+				{ loader: 'file-loader', options: { name: '[name].js', esModule: false } },
 				{
 					loader: 'webpack-rollup-loader',
 					options: {
@@ -31,7 +31,7 @@ module.exports = {
 		}, {
 			test: /\.(png)$/,
 			use: [
-				{ loader: 'file-loader', options: { name: '[name].[ext]' } },
+				{ loader: 'file-loader', options: { name: '[name].[ext]', esModule: false } },
 			],
 		}],
 	},
