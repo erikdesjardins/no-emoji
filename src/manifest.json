@@ -16,6 +16,7 @@
 		"storage",
 		"activeTab"
 	],
+	"content_security_policy": "default-src 'self'",
 	"background": {
 		"scripts": ["{{./js/background.entry.js}}"],
 		"persistent": false
