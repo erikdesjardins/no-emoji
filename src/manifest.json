@@ -4,6 +4,7 @@
 	"short_name": "{{prop-loader?name!../package.json}}",
 	"description": "{{prop-loader?description!../package.json}}",
 	"version": "{{prop-loader?version!../package.json}}",
+	"default_locale": "{{prop-loader?locale!../package.json}}",
 	"minimum_chrome_version": "55",
 	"minimum_opera_version": "42",
 	"applications": {
