@@ -33,12 +33,12 @@ chrome.pageAction.onClicked.addListener(async ({ id: tabId, url }) => {
 
 function enablePageAction(tabId) {
 	chrome.pageAction.show(tabId);
-	chrome.pageAction.setTitle({ tabId, title: 'stop removing emoji on this domain' });
+	chrome.pageAction.setTitle({ tabId, title: chrome.i18n.getMessage('stopRemovingEmoji') });
 	chrome.pageAction.setIcon({ tabId, path: { 19: icon19, 38: icon38 } });
 }
 
 function disablePageAction(tabId) {
 	chrome.pageAction.show(tabId);
-	chrome.pageAction.setTitle({ tabId, title: 'start removing emoji on this domain' });
+	chrome.pageAction.setTitle({ tabId, title: chrome.i18n.getMessage('startRemovingEmoji') });
 	chrome.pageAction.setIcon({ tabId, path: { 19: iconDisabled19, 38: iconDisabled38 } });
 }

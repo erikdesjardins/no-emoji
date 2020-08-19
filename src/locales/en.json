@@ -1,0 +1,18 @@
+{
+  "extensionName": {
+    "message": "No Emoji",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Browser extension to remove emoji.",
+    "description": "Description of the extension."
+  },
+  "stopRemovingEmoji": {
+    "message": "Stop removing emoji on this domain",
+    "description": ""
+  },
+  "startRemovingEmoji": {
+    "message": "Start removing emoji on this domain",
+    "description": ""
+  }
+}

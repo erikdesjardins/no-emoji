@@ -1,0 +1,18 @@
+{
+  "extensionName": {
+    "message": "No Emoji",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Расширение браузера для удаления эмодзи.",
+    "description": "Description of the extension."
+  },
+  "stopRemovingEmoji": {
+    "message": "Прекратить удаление эмодзи на этом домене",
+    "description": ""
+  },
+  "startRemovingEmoji": {
+    "message": "Начать удаление эмодзи на этом домене",
+    "description": ""
+  }
+}
