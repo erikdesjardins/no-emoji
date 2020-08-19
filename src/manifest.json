@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "{{prop-loader?title!../package.json}}",
+	"name": "__MSG_extensionName__",
 	"short_name": "{{prop-loader?name!../package.json}}",
-	"description": "{{prop-loader?description!../package.json}}",
+	"description": "__MSG_extensionDescription__",
 	"version": "{{prop-loader?version!../package.json}}",
-	"default_locale": "{{prop-loader?locale!../package.json}}",
+	"default_locale": "en",
 	"minimum_chrome_version": "55",
 	"minimum_opera_version": "42",
 	"applications": {

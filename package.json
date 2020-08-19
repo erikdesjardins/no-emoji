@@ -1,9 +1,8 @@
 {
-  "title": "__MSG_extensionName__",
+  "title": "No Emoji",
   "name": "no-emoji",
   "version": "0.0.7",
-  "description": "__MSG_extensionDescription__",
-  "locale": "en",
+  "description": "Browser extension to remove emoji.",
   "private": true,
   "repository": {
     "type": "git",
@@ -23,6 +22,7 @@
   },
   "devDependencies": {
     "chrome-extension-deploy": "3.0.0",
+    "copy-webpack-plugin": "6.0.3",
     "extricate-loader": "3.0.0",
     "file-loader": "5.1.0",
     "firefox-extension-deploy": "1.1.2",

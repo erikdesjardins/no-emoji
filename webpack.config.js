@@ -1,5 +1,6 @@
 const path = require('path');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const InertEntryPlugin = require('inert-entry-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 const rollupCommonjsPlugin = require('rollup-plugin-commonjs');
@@ -40,6 +41,12 @@ module.exports = {
 	},
 	plugins: [
 		new InertEntryPlugin(),
+		new CopyWebpackPlugin({
+			patterns: [{
+				from: 'src/locales/*.json',
+				to: '_locales/[name]/messages.json'
+			}]
+		}),
 		new ZipPlugin({ filename: 'no-emoji.zip' }),
 	],
 };
