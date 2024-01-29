@@ -2,25 +2,46 @@ import emojiRegexFactory from 'emoji-regex';
 
 import { STORAGE_EXCLUDED_DOMAINS } from './util/constants';
 import { locationToRootDomain } from './util/location';
-import { send } from './util/messaging';
 import { get } from './util/storage';
 
 (async () => {
 	const excludedDomains = await get(STORAGE_EXCLUDED_DOMAINS, []);
 
-	// check if we're disabled on this domain
-	if (excludedDomains.includes(locationToRootDomain(location))) {
-		// hide the pageAction
-		send(false);
+	// check if we're disabled on this domain, and tell the background page
+	const enabled = !excludedDomains.includes(locationToRootDomain(location));
+
+	chrome.runtime.sendMessage(enabled);
+
+	if (!enabled) {
 		return;
-	} else {
-		// show the pageAction
-		send(true);
 	}
 
 	const emoji = emojiRegexFactory();
 
-	// remove emoji
+	const removeEmoji = node => {
+		const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+		while (walker.nextNode()) {
+			// avoid reads of .nodeValue (5% improvement)
+			const oldVal = walker.currentNode.nodeValue;
+			// not using .test first to avoid running regex twice (10% improvement)
+			// note: in testing `re.test(text)` and `text.replace(re, '') === text`
+			//       have approximately the same performance for negative results,
+			//       which is all that matters, because for positive results
+			//       we always have to run the replace anyways.
+			const newVal = oldVal.replace(emoji, '');
+			// avoid writes of .nodeValue (5% improvement)
+			if (newVal === oldVal) continue;
+
+			walker.currentNode.nodeValue = newVal;
+		}
+	};
+
+	// remove emoji in existing nodes
+	if (document.body) {
+		removeEmoji(document.body);
+	}
+
+	// remove emoji in added nodes
 	new MutationObserver(mutationRecords => {
 		const seenThisTick = new Set();
 
@@ -33,21 +54,7 @@ import { get } from './util/storage';
 				// avoid walking the tree (60% improvement)
 				if (!emoji.test(node.textContent)) continue;
 
-				const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-				while (walker.nextNode()) {
-					// avoid reads of .nodeValue (5% improvement)
-					const oldVal = walker.currentNode.nodeValue;
-					// not using .test first to avoid running regex twice (10% improvement)
-					// note: in testing `re.test(text)` and `text.replace(re, '') === text`
-					//       have approximately the same performance for negative results,
-					//       which is all that matters, because for positive results
-					//       we always have to run the replace anyways.
-					const newVal = oldVal.replace(emoji, '');
-					// avoid writes of .nodeValue (5% improvement)
-					if (newVal === oldVal) continue;
-
-					walker.currentNode.nodeValue = newVal;
-				}
+				removeEmoji(node);
 			}
 		}
 	}).observe(document, { childList: true, subtree: true });

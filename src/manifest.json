@@ -1,26 +1,27 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "__MSG_extensionName__",
 	"short_name": "{{prop-loader?name!../package.json}}",
 	"description": "__MSG_extensionDescription__",
 	"version": "{{prop-loader?version!../package.json}}",
 	"default_locale": "en",
-	"minimum_chrome_version": "55",
-	"minimum_opera_version": "42",
-	"applications": {
+	"minimum_chrome_version": "121",
+	"browser_specific_settings": {
 		"gecko": {
 			"id": "no-emoji@erikdesjardins.io",
-			"strict_min_version": "53.0"
+			"strict_min_version": "121.0"
 		}
 	},
 	"permissions": [
 		"storage",
 		"activeTab"
 	],
-	"content_security_policy": "default-src 'self'",
+	"content_security_policy": {
+		"extension_pages": "default-src 'self'"
+	},
 	"background": {
 		"scripts": ["{{./js/background.entry.js}}"],
-		"persistent": false
+		"service_worker": "{{./js/background.entry.js}}"
 	},
 	"content_scripts": [{
 		"matches": ["<all_urls>"],
@@ -33,10 +34,10 @@
 		"48": "{{./images/icon48.png}}",
 		"128": "{{./images/icon128.png}}"
 	},
-	"page_action": {
+	"action": {
 		"default_icon": {
-			"19": "{{./images/icon19.png}}",
-			"38": "{{./images/icon38.png}}"
+			"19": "{{./images/icon19-inactive.png}}",
+			"38": "{{./images/icon38-inactive.png}}"
 		}
 	}
 }
