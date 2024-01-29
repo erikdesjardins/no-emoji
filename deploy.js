@@ -24,7 +24,7 @@ deployChrome({
 deployFirefox({
 	issuer: process.env.FIREFOX_ISSUER,
 	secret: process.env.FIREFOX_SECRET,
-	id: manifest.applications.gecko.id,
+	id: manifest.browser_specific_settings.gecko.id,
 	version: manifest.version,
 	src: fs.createReadStream(path.join(__dirname, 'dist/no-emoji.zip'))
 }).then(function() {
