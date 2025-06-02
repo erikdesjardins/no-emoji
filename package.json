@@ -18,7 +18,7 @@
     "build": "webpack --progress --mode production"
   },
   "dependencies": {
-    "emoji-regex": "10.3.0"
+    "emoji-regex": "10.4.0"
   },
   "devDependencies": {
     "chrome-extension-deploy": "3.0.0",
